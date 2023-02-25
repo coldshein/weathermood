@@ -11,7 +11,6 @@ const WeakWeather = () => {
     const getForecast = async () => {
         const { data } = await axios.get('https://api.weatherapi.com/v1/forecast.json?key=a1cbaba0df854e36916203726232302&q=London&days=7&aqi=yes&alerts=no');
         await setForecast(data.forecast.forecastday);
-        console.log(forecast)
     }
     React.useEffect(() => {
         getForecast();
@@ -25,14 +24,13 @@ const WeakWeather = () => {
                 <div className="week-row">
                     <Swiper 
                     pagination={true} 
-                    modules={[Pagination]}
+
                     slidesPerView={4}
                     className="mySwiper">
                         {
                             forecast ? forecast.map((item, index) => (
-                                <SwiperSlide>
+                                <SwiperSlide key={index}>
                                     <WeekItem
-                                        key={index}
                                         min={item.day?.mintemp_c}
                                         max={item.day?.maxtemp_c}
                                         condition={item.day?.condition?.text}
