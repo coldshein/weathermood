@@ -4,17 +4,11 @@ import WeekItem from './WeekItem';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import { useSelector } from 'react-redux';
 
 const WeakWeather = () => {
-    const [forecast, setForecast] = React.useState([]);
-    const getForecast = async () => {
-        const { data } = await axios.get('https://api.weatherapi.com/v1/forecast.json?key=a1cbaba0df854e36916203726232302&q=London&days=7&aqi=yes&alerts=no');
-        await setForecast(data.forecast.forecastday);
-    }
-    React.useEffect(() => {
-        getForecast();
-    }, [])
+    const forecast = useSelector((state) => state.weather.forecast)
+    console.log(forecast);
     return (
         <div className="week-weather">
             <div className="week-inner">
@@ -23,22 +17,21 @@ const WeakWeather = () => {
                         className="calendar" /> Week forecast</h2>
                 <div className="week-row">
                     <Swiper 
-                    pagination={true} 
-
+                    pagination={false} 
                     slidesPerView={4}
                     className="mySwiper">
                         {
                             forecast ? forecast.map((item, index) => (
                                 <SwiperSlide key={index}>
                                     <WeekItem
-                                        min={item.day?.mintemp_c}
-                                        max={item.day?.maxtemp_c}
-                                        condition={item.day?.condition?.text}
-                                        icon={item.day?.condition?.icon}
-                                        avgTemp={item.day?.avgtemp_c}
-                                        date={item.date}
-                                        sunrise={item.astro?.sunrise}
-                                        sunset={item.astro?.sunset}
+                                        // min={item.day?.mintemp_c}
+                                        // max={item.day?.maxtemp_c}
+                                        // condition={item.day?.condition?.text}
+                                        // icon={item.day?.condition?.icon}
+                                        // avgTemp={item.day?.avgtemp_c}
+                                        // date={item.date}
+                                        // sunrise={item.astro?.sunrise}
+                                        // sunset={item.astro?.sunset}
                                     />
                                 </SwiperSlide>
                             )) : ''
