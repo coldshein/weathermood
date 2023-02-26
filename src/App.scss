@@ -142,7 +142,6 @@ body {
 
 .weather-wrapper {
     width: 100%;
-    height: 20%;
     background-color: aliceblue;
     border-radius: 20px;
     padding: 20px;
@@ -207,6 +206,7 @@ body {
 
 .city {
     font-size: 22px;
+    font-weight: 700;
 }
 
 .day-info {
@@ -217,7 +217,8 @@ body {
 }
 
 .time {
-    font-size: 26px;
+    font-size: 68px;
+    font-weight: 600;
 }
 
 .day {
@@ -226,7 +227,7 @@ body {
 
 .week-weather {
     width: 60%;
-    height: auto;
+    height: 100%;
     padding: 25px;
     background: rgb(255, 255, 255);
     background: linear-gradient(315deg, rgba(255, 255, 255, 0) 0%, rgba(0, 109, 254, 0.8477984943977591) 100%);
@@ -250,36 +251,49 @@ body {
 }
 .bottom-block{
     display: flex;
-   
     justify-content: space-between;
     gap: 20px;
     width: 100%;
-    height: 80%;
+    height: 400px;
 }
-.air-condition{
+.meteo-block{
     width: 40%;
-    border-radius: 20px;
+    height: 100%;
+}
+.meteo-row{
+   display: grid;
+   height: 100%;
+   gap: 20px;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, 1fr);
+}
+.meteo-item{
     background: rgb(255, 255, 255);
     background: linear-gradient(315deg, rgba(255, 255, 255, 0) 0%, rgba(0, 109, 254, 0.8477984943977591) 100%);
-    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.48);
     border-radius: 20px;
     color: #f5f5f5;
-    padding: 25px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.48);
 }
-.air-info{
-    margin-top: 20px;
+
+.meteo-info{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap:10px;
+    align-items: center;
+    gap: 10px;
+}
+.meteo-icon{
+    width: 30px;
+    height: 30px;
+    img{
+        width: 100%;
+        height: 100%;
+    }
 }
 .meteo-params{
-    font-size: 18px;
-    font-weight: 600;
-    span{
-        font-weight: 400;
-        margin-top: 10px;
-    }
+    text-align: center;
+    padding: 30px 0;
+    font-size: 30px;
+    font-weight: 700;
 }
 .swiper-pagination{
     bottom: -15px !important;
@@ -384,4 +398,10 @@ body {
 .day-sunrise{
     font-size: 14px;
     font-weight: 300;
+}
+
+@media (max-width: 980px) {
+    .weather-inner{
+        gap: 5px;
+    }
 }

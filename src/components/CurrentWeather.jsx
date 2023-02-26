@@ -21,7 +21,8 @@ const CurrentWeather = () => {
                 <WeatherBlock
                     city={weather.location?.name}
                     state={weather.location?.country}
-                    temperature={weather.current?.feelslike_c}
+                    temperature={weather.current?.temp_c}
+                    feelslike={weather.current?.feelslike_c}
                     img={weather.current?.condition?.icon}
                     time={weather.location?.localtime}
                 />

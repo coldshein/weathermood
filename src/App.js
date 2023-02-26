@@ -32,14 +32,44 @@ function App() {
                     <CurrentWeather />
                     <div className='bottom-block'>
                         <WeekForecast />
-                        <div className='air-condition'>
-                            <h2 className='subtitle'><img className="calendar" src='/assets/images/air.svg' />Meteo</h2>
-                            <div className='air-info'>
-                                <div className='meteo-params'>Wind gust: <br/> <span>19.4 kph</span></div>
-                                <div className='meteo-params'>Humidity: <br/> <span>81%</span></div>
-                                <div className='meteo-params'>Pressure: <br/> <span>1021</span></div>
-                                <div className='meteo-params'>Precipitation: <br/> <span>0</span></div>
-                                <div className='meteo-params'>Wind speed: <br/> <span>5.6 kph</span></div>
+                        <div className='meteo-block'>
+                            <div className='meteo-row'>
+                                <div className='meteo-item'>
+                                    <div className='meteo-info'>
+                                        <h2 className='subtitle'>Humidity</h2>
+                                        <div className='meteo-icon'><img className='' src="/assets/images/humidity.svg" /></div>
+                                    </div>
+                                    <div className='meteo-params'>
+                                        64 %
+                                    </div>
+                                </div>
+                                <div className='meteo-item'>
+                                    <div className='meteo-info'>
+                                        <h2 className='subtitle'>Wind</h2>
+                                        <div className='meteo-icon'><img className='' src="/assets/images/wind.svg" /></div>
+                                    </div>
+                                    <div className='meteo-params'>
+                                        12 kmph
+                                    </div>
+                                </div>
+                                <div className='meteo-item'>
+                                     <div className='meteo-info'>
+                                        <h2 className='subtitle'>UV Index</h2>
+                                        <div className='meteo-icon'><img className='' src="/assets/images/uv.svg" /></div>
+                                    </div>
+                                    <div className='meteo-params'>
+                                        1
+                                    </div>
+                                </div>
+                                <div className='meteo-item'>
+                                <div className='meteo-info'>
+                                        <h2 className='subtitle'>Pressure</h2>
+                                        <div className='meteo-icon'><img className='' src="/assets/images/pressure.svg" /></div>
+                                    </div>
+                                    <div className='meteo-params'>
+                                        1030 mBar
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
