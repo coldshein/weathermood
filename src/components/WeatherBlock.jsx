@@ -5,12 +5,14 @@ import { fetchCurrentWeather } from '../redux/slices/weatherSlice';
 
 const WeatherBlock = () => {
     const dispatch = useDispatch();
-
-    React.useEffect(() => {
-        dispatch(fetchCurrentWeather());
-    }, [])
-
     const current = useSelector((state) => state.weather.current);
+    const searchValue = useSelector((state) => state.weather.searchValue);
+    
+    React.useEffect(() => {
+        dispatch(fetchCurrentWeather(searchValue));
+    }, [searchValue])
+
+   
 
     const celsium = Math.floor(current.current?.temp_c)
     const feels = Math.floor(current.current?.feelslike_c);
