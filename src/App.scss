@@ -24,9 +24,11 @@ h1{
     width: 100%;
 }
 body {
-    background: rgb(255,255,255);
-    background: linear-gradient(220deg, rgba(255,255,255,1) 0%, rgba(150,147,247,1) 50%, rgba(254,194,0,0.8477984943977591) 100%);
-    height: 100vh;
+    background: rgb(145,139,255);
+background: linear-gradient(-45deg, rgba(145,139,255,1) 0%, rgba(43, 73, 138, 0.336) 100%);
+	background-size: 400% 400%;
+	animation: gradient 20s ease infinite;
+	height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -42,6 +44,17 @@ body {
         height: 100%;
         backdrop-filter: blur(5px);
     }
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 
@@ -403,5 +416,25 @@ body {
 @media (max-width: 980px) {
     .weather-inner{
         gap: 5px;
+    }
+}
+
+.query-list{
+    position: absolute;
+    z-index: 2;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+    width: 100%;
+    border-radius: 10px;
+    ul{
+        list-style: none !important;
+        li{
+            padding: 10px 20px;
+            transition: all .1s ease-in-out;
+            cursor: pointer;
+            &:hover{
+                font-weight: 700;
+            }
+        }
     }
 }

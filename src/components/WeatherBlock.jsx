@@ -10,6 +10,7 @@ const WeatherBlock = () => {
     
     React.useEffect(() => {
         dispatch(fetchCurrentWeather(searchValue));
+        console.log(current);
     }, [searchValue])
 
    

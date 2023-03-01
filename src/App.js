@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useRef } from 'react';
 import './App.scss';
 import WeekForecast from './components/WeekForecast';
 import WeatherBlock from './components/WeatherBlock';
@@ -16,9 +16,36 @@ function App() {
     const [inputValue, setInputValue] = React.useState('');
     const dispatch = useDispatch();
 
-    const handleSearch = debounce((event) => {
-        dispatch(setSearchValue(event.target.value))
-    }, 2000)
+
+    const [query, setQuery] = React.useState('');
+    const [city, setCity] = React.useState([]);
+    const [showCities, setShowCities] = React.useState(false);
+    const searchCities = async (query) => {
+        const response = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=2rAPo1eTSkYOE6kYz2dHKmfmvOXbKvfK&q=${query}`);
+        setCity(response.data);
+    }
+
+    const handleInputChange = (event) => {
+        const query = event.target.value;
+        setQuery(query);
+        if (query.length > 2) {
+            searchCities(query);
+            setShowCities(true);
+        } else {
+            setShowCities(false);
+        }
+    };
+
+    const cityRef = useRef();
+
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            if(cityRef.current && !event.path.includes(cityRef.current)){
+                setShowCities(false);
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside);
+    },[])
 
     return (
         <section className="app-wrapper">
@@ -32,12 +59,22 @@ function App() {
                                 className="search"
                                 id="search"
                                 placeholder="Enter city name..."
-                                value={inputValue}
-                                onChange={(event) => {
-                                    setInputValue(event.target.value);
-                                    handleSearch(event);
-                                }}
+                                value={query}
+                                onChange={handleInputChange}
                             />
+                            {
+                                showCities && (
+                                    <div className='query-list' ref={cityRef}>
+                                        <ul>
+                                            {
+                                                city.map((city) => (
+                                                    <li key={city.key}>{city.LocalizedName}, {city.Country?.LocalizedName}</li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                )
+                            }
                             <label htmlFor="search">
                                 <img src="/assets/images/search.svg" alt="" />
                             </label>
