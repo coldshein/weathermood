@@ -1,51 +1,44 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.scss';
 import WeekForecast from './components/WeekForecast';
 import WeatherBlock from './components/WeatherBlock';
 import WeekItem from './components/WeekItem';
 import CurrentWeather from './components/CurrentWeather';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue } from './redux/slices/weatherSlice';
+import { fetchCities, fetchCurrentWeather, setCities, setSearchValue } from './redux/slices/weatherSlice';
 import debounce from 'lodash.debounce';
 
 
 
 function App() {
-    const searchValue = useSelector((state) => state.weather.searchValue);
-    const [inputValue, setInputValue] = React.useState('');
     const dispatch = useDispatch();
+    const { current, cities } = useSelector((state) => state.weather)
+    const cityRef = useRef();
 
-
-    const [query, setQuery] = React.useState('');
-    const [city, setCity] = React.useState([]);
     const [showCities, setShowCities] = React.useState(false);
-    const searchCities = async (query) => {
-        const response = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=2rAPo1eTSkYOE6kYz2dHKmfmvOXbKvfK&q=${query}`);
-        setCity(response.data);
-    }
+    const [query, setQuery] = React.useState('');
 
     const handleInputChange = (event) => {
-        const query = event.target.value;
-        setQuery(query);
+        const query = event.target.value
+        setQuery(query)
         if (query.length > 2) {
-            searchCities(query);
-            setShowCities(true);
+            dispatch(fetchCities(query));
+            setShowCities(true)
         } else {
             setShowCities(false);
         }
-    };
-
-    const cityRef = useRef();
+    }
+    const handleCityClick = (city) => {
+        setQuery(city.name)
+        setCities([]);
+        dispatch(fetchCurrentWeather(city));
+        setShowCities(false);
+    }
 
     React.useEffect(() => {
-        const handleClickOutside = (event) => {
-            if(cityRef.current && !event.path.includes(cityRef.current)){
-                setShowCities(false);
-            }
-        }
-        document.body.addEventListener('click', handleClickOutside);
-    },[])
+
+    }, [])
 
     return (
         <section className="app-wrapper">
@@ -61,14 +54,17 @@ function App() {
                                 placeholder="Enter city name..."
                                 value={query}
                                 onChange={handleInputChange}
+
                             />
                             {
                                 showCities && (
                                     <div className='query-list' ref={cityRef}>
                                         <ul>
                                             {
-                                                city.map((city) => (
-                                                    <li key={city.key}>{city.LocalizedName}, {city.Country?.LocalizedName}</li>
+                                                cities.map((city) => (
+                                                    <li key={city.id} onClick={() => handleCityClick(city)}>
+                                                        {city.name}
+                                                    </li>
                                                 ))
                                             }
                                         </ul>
@@ -96,7 +92,7 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/humidity.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        64 %
+                                        {current.main?.humidity} %
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
@@ -105,16 +101,16 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/wind.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        12 kmph
+                                        {current.wind?.speed} kmph
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
                                     <div className='meteo-info'>
-                                        <h2 className='subtitle'>UV Index</h2>
+                                        <h2 className='subtitle'>Visibility</h2>
                                         <div className='meteo-icon'><img className='' src="/assets/images/uv.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        1
+                                        {current.visibility}
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
@@ -123,7 +119,7 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/pressure.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        1030 mBar
+                                        {current.main?.pressure} hPa
                                     </div>
                                 </div>
                             </div>

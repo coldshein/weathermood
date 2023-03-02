@@ -11,10 +11,6 @@ const WeakWeather = () => {
     const forecast = useSelector((state) => state.weather.forecast)
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        dispatch(fetchWeatherForecast());
-        console.log(forecast)
-    }, [])
 
     return (
         <div className="week-weather">

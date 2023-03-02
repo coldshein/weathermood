@@ -3,22 +3,28 @@ import axios from "axios";
 const initialState = {
     current: [],
     forecast: [],
-    searchValue: 'Kiev',
+    searchValue: 'Kyiv',
+    cities: [],
 }
 
 export const fetchCurrentWeather = createAsyncThunk(
     'weather/fetchCurrentWeather',
-    async (searchValue, {dispatch}) => {
-        // const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=mariupol&appid=38e3a5f5afb6196d6ee28a5520484f2d`);
-        // dispatch(setCurrent(data));
+    async (city, {dispatch}) => {
+        const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
+        );
+        dispatch(setCurrent(response.data));
+        console.log(response.data)
     }
 )
 
-export const fetchWeatherForecast = createAsyncThunk(
+export const fetchCities = createAsyncThunk(
     'weather/fetchWeatherForecast',
-    async (_, {dispatch}) => {
-        // const {data} = await axios.get('https://api.weatherapi.com/v1/forecast.json?key=a1cbaba0df854e36916203726232302&q=London&days=7&aqi=yes&alerts=no');
-    //    dispatch(setForecast(data.forecast.forecastday))
+    async (query, {dispatch}) => {
+        const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/find?q=${query}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
+          );
+          dispatch(setCities(response.data.list));
     }
 )
 
@@ -34,10 +40,13 @@ export const weatherSlice = createSlice({
         },
         setSearchValue: (state, action) => {
             state.searchValue = action.payload;
+        },
+        setCities: (state, action) => {
+            state.cities = action.payload
         }
     }
 })
 
-export const {setCurrent, setForecast, setSearchValue} = weatherSlice.actions
+export const {setCurrent, setForecast, setSearchValue, setCities} = weatherSlice.actions
 
 export default weatherSlice.reducer

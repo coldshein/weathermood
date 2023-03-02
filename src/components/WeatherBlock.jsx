@@ -6,38 +6,46 @@ import { fetchCurrentWeather } from '../redux/slices/weatherSlice';
 const WeatherBlock = () => {
     const dispatch = useDispatch();
     const current = useSelector((state) => state.weather.current);
-    const searchValue = useSelector((state) => state.weather.searchValue);
     
-    React.useEffect(() => {
-        dispatch(fetchCurrentWeather(searchValue));
-        console.log(current);
-    }, [searchValue])
+    const timezoneOffset = current.timezone; // змінна для часового поясу
+    
+    
+    const currentDate = new Date(); // створюємо об'єкт дати
+    
+    // Отримуємо день тижня на основі часового поясу
+    const dayOfWeek = new Date(currentDate.getTime() + timezoneOffset * 1000).getUTCDay();
+    
+    // Масив з назвами днів тижня
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    // Отримуємо назву дня тижня
+    const dayName = daysOfWeek[dayOfWeek];
+    
 
-   
-
-    const celsium = Math.floor(current.current?.temp_c)
-    const feels = Math.floor(current.current?.feelslike_c);
-
-    let time;
-    if (current.location?.localtime) {
-        time = current.location?.localtime.slice(11, 16);
-    } else {
-        return 'loading...'
+    
+    if(!current){
+        return 'Loading...'
     }
-    
+    const index = 0
     return (
         <div className="weather-block">
             <div className="weather-info">
                 <div className="sunshine">
-                    <img src={current.current?.condition?.icon} alt="" />
+                    <img src alt="" />
                 </div>
-                <div className="temperature">{celsium} &#176;</div>
-                <div className="feelslike">Feels like {feels} &#176;</div>
-                <div className="city">{current.location?.name}, {current.location?.country}</div>
+                <div className="weather-condition">
+
+                    {
+                        current.weather && current.weather[0].main
+                    }
+                </div>
+                <div className="temperature">{current.main?.temp} &#176;</div>
+                <div className="feelslike">Feels like {current.main?.feels_like} &#176;</div>
+                <div className="city">{current.name}, {current.sys?.country}</div>
             </div>
             <div className="day-info">
-                <div className="time">{time}</div>
-                <div className="day">Sunset time, Monday</div>
+                <div className="time"></div>
+                <div className="day">Sunset time, {dayName}</div>
             </div>
         </div>
     );
