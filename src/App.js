@@ -6,7 +6,7 @@ import WeatherBlock from './components/WeatherBlock';
 import WeekItem from './components/WeekItem';
 import CurrentWeather from './components/CurrentWeather';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCities, fetchCurrentWeather, setCities, setSearchValue } from './redux/slices/weatherSlice';
+import { fetchCities, fetchCurrentWeather, fetchForecast, setCities, setSearchValue } from './redux/slices/weatherSlice';
 import debounce from 'lodash.debounce';
 
 
@@ -33,11 +33,18 @@ function App() {
         setQuery(city.name)
         setCities([]);
         dispatch(fetchCurrentWeather(city));
+        dispatch(fetchForecast(city));
         setShowCities(false);
     }
 
     React.useEffect(() => {
-
+        const kyiv = {
+            name: 'Kyiv',
+            id: 703448,
+            country: 'UA',
+        }
+        dispatch(fetchCurrentWeather(kyiv))
+        dispatch(fetchForecast(kyiv));
     }, [])
 
     return (
@@ -74,12 +81,13 @@ function App() {
                             <label htmlFor="search">
                                 <img src="/assets/images/search.svg" alt="" />
                             </label>
+                            <button className="top-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                         </div>
-                        <button className="top-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
+
                     </div>
                     <CurrentWeather />
                     <div className='bottom-block'>

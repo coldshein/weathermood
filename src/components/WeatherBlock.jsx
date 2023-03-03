@@ -30,9 +30,6 @@ const WeatherBlock = () => {
     return (
         <div className="weather-block">
             <div className="weather-info">
-                <div className="sunshine">
-                    <img src alt="" />
-                </div>
                 <div className="weather-condition">
 
                     {

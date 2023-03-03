@@ -3,7 +3,6 @@ import axios from "axios";
 const initialState = {
     current: [],
     forecast: [],
-    searchValue: 'Kyiv',
     cities: [],
 }
 
@@ -14,7 +13,7 @@ export const fetchCurrentWeather = createAsyncThunk(
             `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
         );
         dispatch(setCurrent(response.data));
-        console.log(response.data)
+        
     }
 )
 
@@ -28,6 +27,15 @@ export const fetchCities = createAsyncThunk(
     }
 )
 
+export const fetchForecast = createAsyncThunk(
+    'weather/fetchForecast',
+    async (city, {dispatch}) => {
+        const response = await axios.get(`api.openweathermap.org/data/2.5/forecast/daily?q=${city.name},${city.country}&cnt=1&appid=38e3a5f5afb6196d6ee28a5520484f2d`)
+        dispatch(setForecast(response));
+        console.log(response);
+    }
+)
+
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState,
@@ -37,9 +45,6 @@ export const weatherSlice = createSlice({
         },
         setForecast: (state,action) => {
             state.forecast = action.payload
-        },
-        setSearchValue: (state, action) => {
-            state.searchValue = action.payload;
         },
         setCities: (state, action) => {
             state.cities = action.payload
