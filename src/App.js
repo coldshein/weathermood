@@ -33,7 +33,6 @@ function App() {
         setQuery(city.name)
         setCities([]);
         dispatch(fetchCurrentWeather(city));
-        dispatch(fetchForecast(city));
         setShowCities(false);
     }
 
@@ -44,7 +43,6 @@ function App() {
             country: 'UA',
         }
         dispatch(fetchCurrentWeather(kyiv))
-        dispatch(fetchForecast(kyiv));
     }, [])
 
     return (

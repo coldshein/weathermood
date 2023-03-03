@@ -8,22 +8,30 @@ const initialState = {
 
 export const fetchCurrentWeather = createAsyncThunk(
     'weather/fetchCurrentWeather',
-    async (city, {dispatch}) => {
+    async (city, {dispatch,rejectWithValue}) => {
+       try{
         const response = await axios.get(
             `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
         );
         dispatch(setCurrent(response.data));
+       } catch(error){
+         return rejectWithValue(error.message);
+       }
         
     }
 )
 
 export const fetchCities = createAsyncThunk(
     'weather/fetchWeatherForecast',
-    async (query, {dispatch}) => {
-        const response = await axios.get(
-            `https://api.openweathermap.org/data/2.5/find?q=${query}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
-          );
-          dispatch(setCities(response.data.list));
+    async (query, {dispatch, rejectWithValue}) => {
+        try{
+            const response = await axios.get(
+                `https://api.openweathermap.org/data/2.5/find?q=${query}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
+              );
+              dispatch(setCities(response.data.list));
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
     }
 )
 
