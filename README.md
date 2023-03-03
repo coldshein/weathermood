@@ -1,7 +1,8 @@
 # coldshein-weather
 ## Technologies
 * React
-* React-hooks
+* Axios
 * Redux toolkit
+* AsyncThunk
 * Typescript
-* WeatherAPI
+* OpenWeatherMap
