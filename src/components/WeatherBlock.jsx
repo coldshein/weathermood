@@ -5,9 +5,9 @@ import { fetchCurrentWeather } from '../redux/slices/weatherSlice';
 
 const WeatherBlock = () => {
     const dispatch = useDispatch();
-    const current = useSelector((state) => state.weather.current);
+    const {current, location} = useSelector((state) => state.weather);
     
-    const timezoneOffset = current.timezone; // змінна для часового поясу
+    const timezoneOffset = location.localtime_epoch; // змінна для часового поясу
     
     
     const currentDate = new Date(); // створюємо об'єкт дати
@@ -22,26 +22,22 @@ const WeatherBlock = () => {
     const dayName = daysOfWeek[dayOfWeek];
     
 
-    
+
     if(!current){
         return 'Loading...'
     }
-    const index = 0
     return (
         <div className="weather-block">
             <div className="weather-info">
                 <div className="weather-condition">
-
-                    {
-                        current.weather && current.weather[0].main
-                    }
+                    {current.condition?.text}
                 </div>
-                <div className="temperature">{current.main?.temp} &#176;</div>
-                <div className="feelslike">Feels like {current.main?.feels_like} &#176;</div>
-                <div className="city">{current.name}, {current.sys?.country}</div>
+                <div className="temperature">{current.temp_c} &#176;</div>
+                <div className="feelslike">Feels like {current.feelslike_c} &#176;</div>
+                <div className="city">{location.name}, {location.country}</div>
             </div>
             <div className="day-info">
-                <div className="time"></div>
+                <div className="time"><img src={current.condition?.icon} alt="" /></div>
                 <div className="day">Sunset time, {dayName}</div>
             </div>
         </div>

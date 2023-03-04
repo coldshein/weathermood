@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeatherForecast } from '../redux/slices/weatherSlice';
 
 const WeakWeather = () => {
     const {current, forecast} = useSelector((state) => state.weather)

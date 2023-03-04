@@ -13,7 +13,7 @@ import debounce from 'lodash.debounce';
 
 function App() {
     const dispatch = useDispatch();
-    const { current, cities } = useSelector((state) => state.weather)
+    const { current, cities, forecast } = useSelector((state) => state.weather)
     const cityRef = useRef();
 
     const [showCities, setShowCities] = React.useState(false);
@@ -24,6 +24,7 @@ function App() {
         setQuery(query)
         if (query.length > 2) {
             dispatch(fetchCities(query));
+            
             setShowCities(true)
         } else {
             setShowCities(false);
@@ -32,17 +33,15 @@ function App() {
     const handleCityClick = (city) => {
         setQuery(city.name)
         setCities([]);
-        dispatch(fetchCurrentWeather(city));
+        dispatch(fetchForecast(city));
         setShowCities(false);
     }
 
     React.useEffect(() => {
-        const kyiv = {
-            name: 'Kyiv',
-            id: 703448,
-            country: 'UA',
+        const main = {
+            name: 'Korosten',
         }
-        dispatch(fetchCurrentWeather(kyiv))
+        dispatch(fetchForecast(main));
     }, [])
 
     return (
@@ -68,7 +67,7 @@ function App() {
                                             {
                                                 cities.map((city) => (
                                                     <li key={city.id} onClick={() => handleCityClick(city)}>
-                                                        {city.name}
+                                                        {city.name}, {city.country}
                                                     </li>
                                                 ))
                                             }
@@ -98,7 +97,7 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/humidity.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        {current.main?.humidity} %
+                                        {current.humidity} %
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
@@ -107,7 +106,7 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/wind.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        {current.wind?.speed} kmph
+                                        {current.wind_kph} kmph
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
@@ -116,7 +115,7 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/uv.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        {current.visibility}
+                                        {current.vis_km}
                                     </div>
                                 </div>
                                 <div className='meteo-item'>
@@ -125,10 +124,10 @@ function App() {
                                         <div className='meteo-icon'><img className='' src="/assets/images/pressure.svg" /></div>
                                     </div>
                                     <div className='meteo-params'>
-                                        {current.main?.pressure} hPa
+                                        {current.pressure_mb} mB
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
