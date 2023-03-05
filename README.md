@@ -5,4 +5,4 @@
 * Redux toolkit
 * AsyncThunk
 * Typescript
-* OpenWeatherMap
+* WeatherAPI (daily forecast and current weather)
