@@ -26,6 +26,14 @@ const WeakWeather = () => {
                             forecast && forecast.map((item, index) => (
                                 <SwiperSlide key={index}>
                                     <WeekItem
+                                    sunrise={item.astro?.sunrise}
+                                    sunset={item.astro?.sunset}
+                                    date={item.date}
+                                    maxtemp={item.day?.maxtemp_c}
+                                    mintemp={item.day?.mintemp_c}
+                                    avgtemp={item.day?.avgtemp_c}
+                                    icon={item.day?.condition?.icon}
+                                    text={item.day?.condition?.text}
                                     
                                     />
                                 </SwiperSlide>
