@@ -5,25 +5,16 @@ import { fetchCurrentWeather } from '../redux/slices/weatherSlice';
 
 const WeatherBlock = () => {
     const dispatch = useDispatch();
-    const {current, location} = useSelector((state) => state.weather);
-    
-    const timezoneOffset = location.localtime_epoch; // змінна для часового поясу
-    
-    
-    const currentDate = new Date(); // створюємо об'єкт дати
-    
-    // Отримуємо день тижня на основі часового поясу
-    const dayOfWeek = new Date(currentDate.getTime() + timezoneOffset * 1000).getUTCDay();
-    
-    // Масив з назвами днів тижня
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    
-    // Отримуємо назву дня тижня
-    const dayName = daysOfWeek[dayOfWeek];
-    
+    const { current, location } = useSelector((state) => state.weather);
+
+    const epoch = location.localtime_epoch;
+
+    const date = new Date(epoch * 1000);
+
+    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
 
 
-    if(!current){
+    if (!current) {
         return 'Loading...'
     }
     return (
@@ -38,7 +29,7 @@ const WeatherBlock = () => {
             </div>
             <div className="day-info">
                 <div className="time"><img src={current.condition?.icon} alt="" /></div>
-                <div className="day">Sunset time, {dayName}</div>
+                <div className="day">{dayOfWeek}</div>
             </div>
         </div>
     );

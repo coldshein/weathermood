@@ -7,16 +7,15 @@ import "swiper/css/pagination";
 import { useDispatch, useSelector } from 'react-redux';
 
 const WeakWeather = () => {
-    const {current, forecast} = useSelector((state) => state.weather)
+    const {current, forecast, location} = useSelector((state) => state.weather)
     const dispatch = useDispatch();
-
 
     return (
         <div className="week-weather">
             <div className="week-inner">
                 <h2 className="subtitle">
                     <img src="/assets/images/calendar.svg" alt="calendar-icon"
-                        className="calendar" /> Week forecast for {current.name}</h2>
+                        className="calendar" /> Week forecast for {location.name}</h2>
                 <div className="week-row">
                     <Swiper
                         pagination={false}
@@ -34,7 +33,6 @@ const WeakWeather = () => {
                                     avgtemp={item.day?.avgtemp_c}
                                     icon={item.day?.condition?.icon}
                                     text={item.day?.condition?.text}
-                                    
                                     />
                                 </SwiperSlide>
                             ))

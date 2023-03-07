@@ -7,22 +7,7 @@ const initialState = {
     location: [],
 }
 
-// export const fetchCurrentWeather = createAsyncThunk(
-//     'weather/fetchCurrentWeather',
-//     async (city, { dispatch, rejectWithValue }) => {
-//         try {
-//             const response = await axios.get(
-//                 // `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
-//                 `http://api.weatherapi.com/v1/current.json?key=acf9cfbab835459a8c2205404230403&q=${city.name}&aqi=no`
-//             );
-//             dispatch(setCurrent(response.data));
-//             console.log(response.data)
-//         } catch (error) {
-//             return rejectWithValue(error.message);
-//         }
 
-//     }
-// )
 
 export const fetchCities = createAsyncThunk(
     'weather/fetchWeatherForecast',
