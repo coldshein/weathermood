@@ -33,6 +33,7 @@ const WeakWeather = () => {
                                     avgtemp={item.day?.avgtemp_c}
                                     icon={item.day?.condition?.icon}
                                     text={item.day?.condition?.text}
+                                    
                                     />
                                 </SwiperSlide>
                             ))

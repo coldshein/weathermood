@@ -20,7 +20,7 @@ const WeatherBlock = () => {
     return (
         <div className="weather-block">
             <div className="weather-info">
-                <div className="weather-condition">
+                <div className="weather-condition"> 
                     {current.condition?.text}
                 </div>
                 <div className="temperature">{current.temp_c} &#176;</div>
@@ -28,7 +28,7 @@ const WeatherBlock = () => {
                 <div className="city">{location.name}, {location.country}</div>
             </div>
             <div className="day-info">
-                <div className="time"><img src={current.condition?.icon} alt="" /></div>
+                <div className="current-icon"><img src={current.condition?.icon} alt="" /></div>
                 <div className="day">{dayOfWeek}</div>
             </div>
         </div>

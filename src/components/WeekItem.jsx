@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeatherForecast } from '../redux/slices/weatherSlice';
 
-const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, condition, sunrise, sunset}) => {
+const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, text, sunrise, sunset}) => {
   
     const forecast = useSelector((state) => state.weather.forecast)
 
@@ -19,7 +19,7 @@ const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, condition, sunrise, su
     const day_number = date_obj.getDate();
     const month_name = month_names[month_index]
     const weekday_name = day_names[day_index];
-
+    console.log(forecast)
     return (
         <div className="day-item">
             {
@@ -28,10 +28,10 @@ const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, condition, sunrise, su
                         <div className="day-name">{weekday_name}</div>
                         <div className="day-date">{day_number} {month_name}</div>
                         <div className="day-weather"><img src={icon} alt="" /></div>
-                        <div className="day-condition">{condition}</div>
+                        <div className="day-condition">{text}</div>
                         <div className="day-temperature">{temp} &#176; </div>
-                        <div className="day-tempRange">{minTemp} &#176; - {maxTemp} &#176; </div>
-                        <div className="day-sunrise">Sunrise: {sunrise} <br /> Sunset: {sunset}</div>
+                        <div className="day-tempRange">{minTemp} &#176; -- {maxTemp} &#176; </div>
+                        
                     </>
                 )
             }

@@ -175,7 +175,6 @@ body {
 
 .weather-wrapper {
     width: 100%;
-    background-color: aliceblue;
     border-radius: 20px;
     padding: 20px;
     background-color: rgba(245, 245, 245, 0.2);
@@ -237,7 +236,7 @@ body {
     color: #f5f5f5;
 }
 
-.time {
+.current-icon {
     font-size: 68px;
     font-weight: 600;
     text-align: center;
@@ -450,6 +449,34 @@ body {
 }
 
 @media (max-width: 980px) {
+    .subtitle{
+        font-size: 14px;
+    }
+    .day-condition{
+        font-size: 14px;
+    }
+    .weather-wrapper{
+        background-color: transparent;
+    }
+    .weather-block{
+        flex-direction: column;
+        align-items: center;
+    }
+    .weather-condition{
+        text-align: center;
+    }
+    .temperature{
+        text-align: center;
+    }
+    .feelslike{
+        text-align: center;
+    }
+    .current-icon{
+        display: none;
+    }
+    .week-weather{
+        padding: 20px;
+    }
     body {
         padding: 30px 0;
         background-size: 200% 200%;
@@ -484,17 +511,38 @@ body {
         height: 22px;
     }
 }
+@media (max-width: 500px) {
+    .container{
+        padding: 10px;
+    }
+    .day-condition{
+        font-size: 12px;
+    }
+}
 
 .query-list {
     position: absolute;
     z-index: 5;
     top: 50px;
     margin-top: 10px;
-    background-color: #f5f5f5;
     width: 100%;
     border-radius: 15px;
+    &::after{
+        position: absolute;
+        display: flex;
+        content: '';
+        height: 100%;
+        width: 100%;
+        border-radius: 15px;
+        top: 0;
+        left: 0;
+        backdrop-filter: blur(10px);
+        background-color: #f5f5f580;
+    }
 
     ul {
+        position: relative; 
+        z-index: 2;
         list-style: none !important;
 
         li {
