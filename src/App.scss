@@ -471,6 +471,9 @@ body {
     .feelslike{
         text-align: center;
     }
+    .city{
+        text-align: center;
+    }
     .current-icon{
         display: none;
     }
@@ -527,28 +530,32 @@ body {
     margin-top: 10px;
     width: 100%;
     border-radius: 15px;
-    &::after{
-        position: absolute;
-        display: flex;
-        content: '';
-        height: 100%;
-        width: 100%;
-        border-radius: 15px;
-        top: 0;
-        left: 0;
-        backdrop-filter: blur(10px);
-        background-color: #f5f5f580;
-    }
+   
 
     ul {
         position: relative; 
-        z-index: 2;
         list-style: none !important;
+        &::after{
+            position: absolute;
+            display: flex;
+            content: '';
+            height: 100%;
+            width: 100%;
+            border-radius: 15px;
+            top: 0;
+            z-index: 2;
+            left: 0;
+            backdrop-filter: blur(10px);
+            background-color: #f5f5f5ee;
+        }
 
         li {
+            position: relative;
+            z-index: 3;
             padding: 10px 20px;
             transition: all .1s ease-in-out;
             cursor: pointer;
+            font-weight: 300;
 
             &:hover {
                 font-weight: 700;
