@@ -30,7 +30,7 @@ const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, text, sunrise, sunset}
                         <div className="day-weather"><img src={icon} alt="" /></div>
                         <div className="day-condition">{text}</div>
                         <div className="day-temperature">{temp} &#176; </div>
-                        <div className="day-tempRange">{minTemp} &#176; -- {maxTemp} &#176; </div>
+                        <div className="day-tempRange">{minTemp} &#176; <span></span> {maxTemp} &#176; </div>
                         
                     </>
                 )

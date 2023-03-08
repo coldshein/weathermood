@@ -49,7 +49,7 @@ function App() {
             <div className="container">
                 <div className="app-inner">
                     <div className="top-block">
-                        <h1>coldshein weather app</h1>
+                        <h1>WeatherMo&#176;D</h1>
                         <div className="search-wrapper">
                             <input
                                 type="text"

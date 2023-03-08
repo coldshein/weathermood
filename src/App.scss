@@ -431,15 +431,30 @@ body {
 }
 
 .day-temperature {
+    display: flex;
     font-size: 22px;
     text-align: center;
     font-weight: 700;
+    justify-content: center;
 }
 
 .day-tempRange {
     text-align: center;
     font-size: 14px;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    gap: 10px;
+    span{
+        display: block;
+        height: 4px;
+        width: 30px;
+        border-radius: 10px;
+        background: rgb(139,139,255);
+background: linear-gradient(102deg, rgba(139,139,255,1) 0%, rgba(204,255,192,1) 45%, rgba(255,141,0,1) 100%);
+    }
 }
 
 .day-sunrise {

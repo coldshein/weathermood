@@ -14,7 +14,6 @@ export const fetchCities = createAsyncThunk(
     async (query, { dispatch, rejectWithValue }) => {
         try {
             const response = await axios.get(
-                // `https://api.openweathermap.org/data/2.5/find?q=${query}&units=metric&appid=38e3a5f5afb6196d6ee28a5520484f2d`
                 `https://api.weatherapi.com/v1/search.json?key=acf9cfbab835459a8c2205404230403&q=${query}`
             );
             dispatch(setCities(response.data));
@@ -29,7 +28,6 @@ export const fetchForecast = createAsyncThunk(
     async (city, { dispatch, rejectWithValue }) => {
         try {
             const response = await axios.get(
-                // `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city.name}&cnt=5&appid=38e3a5f5afb6196d6ee28a5520484f2d`
                 `https://api.weatherapi.com/v1/forecast.json?key=acf9cfbab835459a8c2205404230403&q=${city.name}&days=6&aqi=no&alerts=no`
             )
             dispatch(setForecast(response.data.forecast.forecastday));
