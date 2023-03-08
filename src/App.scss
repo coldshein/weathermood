@@ -536,6 +536,12 @@ background: linear-gradient(102deg, rgba(139,139,255,1) 0%, rgba(204,255,192,1) 
     .day-condition{
         font-size: 12px;
     }
+    .day-tempRange{
+        gap:3px;
+    }
+    .week-weather{
+        padding: 15px;
+    }
 }
 
 .query-list {
