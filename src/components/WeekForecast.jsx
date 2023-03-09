@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const WeakWeather = () => {
     const {current, forecast, location} = useSelector((state) => state.weather)
-    const dispatch = useDispatch();
 
     return (
         <div className="week-weather">
@@ -19,7 +18,7 @@ const WeakWeather = () => {
                 <div className="week-row">
                     <Swiper
                         pagination={false}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         className="mySwiper">
                         {
                             forecast && forecast.map((item, index) => (

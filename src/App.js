@@ -8,6 +8,7 @@ import CurrentWeather from './components/CurrentWeather';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCities, fetchCurrentWeather, fetchForecast, setCities, setSearchValue } from './redux/slices/weatherSlice';
 import debounce from 'lodash.debounce';
+import HourlyForecast from './components/HourlyForecast';
 
 
 
@@ -84,11 +85,11 @@ function App() {
                                 <span></span>
                             </button>
                         </div>
-
                     </div>
                     <CurrentWeather />
                     <div className='bottom-block'>
                         <WeekForecast />
+                        <HourlyForecast/>
                         <div className='meteo-block'>
                             <div className='meteo-row'>
                                 <div className='meteo-item'>

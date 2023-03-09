@@ -19,7 +19,6 @@ const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, text, sunrise, sunset}
     const day_number = date_obj.getDate();
     const month_name = month_names[month_index]
     const weekday_name = day_names[day_index];
-    console.log(forecast)
     return (
         <div className="day-item">
             {
