@@ -14,7 +14,7 @@ import HourlyForecast from './components/HourlyForecast';
 
 function App() {
     const dispatch = useDispatch();
-    const { current, cities, forecast } = useSelector((state) => state.weather)
+    const { current, cities, forecast, showHourly } = useSelector((state) => state.weather)
     const cityRef = useRef();
 
     const [showCities, setShowCities] = React.useState(false);
@@ -90,7 +90,7 @@ function App() {
                     <div className='bottom-block'>
                         <WeekForecast />
                         <HourlyForecast/>
-                        <div className='meteo-block'>
+                        <div className={`meteo-block ${showHourly ? `nonactive` : null}`}>
                             <div className='meteo-row'>
                                 <div className='meteo-item'>
                                     <div className='meteo-info'>

@@ -1,8 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherForecast } from '../redux/slices/weatherSlice';
+import { fetchWeatherForecast, setHourly } from '../redux/slices/weatherSlice';
 
 const WeekItem = ({mintemp, maxtemp, avgtemp, date, icon, text, sunrise, sunset}) => {
+
+    const dispatch = useDispatch();
+    
   
     const forecast = useSelector((state) => state.weather.forecast)
 

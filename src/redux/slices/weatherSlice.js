@@ -5,6 +5,8 @@ const initialState = {
     forecast: [],
     cities: [],
     location: [],
+    hour: 0,
+    showHourly: false,
 }
 
 
@@ -54,10 +56,16 @@ export const weatherSlice = createSlice({
         },
         setLocation: (state,action) => {
             state.location = action.payload
+        },
+        setHourly: (state, action) => {
+            state.hour = action.payload
+        },
+        setShowHourly: (state,action) => {
+            state.showHourly = action.payload
         }
     }
 })
 
-export const { setCurrent, setForecast, setSearchValue, setCities, setLocation } = weatherSlice.actions
+export const { setCurrent, setForecast, setSearchValue, setCities, setLocation, setHourly, setShowHourly } = weatherSlice.actions
 
 export default weatherSlice.reducer

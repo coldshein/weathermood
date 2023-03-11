@@ -259,18 +259,22 @@ body {
     display: none;
     padding: 20px;
     border-radius: 20px;
-    background-color: #333;
+    background-color: rgba(245, 245, 245, 0.2);
     position: absolute;
     top: 0;
     right: 0;
-    width: 49%;
+    width: 48%;
     height: 100%;
     z-index: 3;
+    &.active{
+        display: block;
+    }
 }
+
 .hourly-inner{
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    height: 100%;
 }
 .hourly-row{
     display: flex;
@@ -315,10 +319,11 @@ body {
 .meteo-block {
     width: 50%;
     height: 100%;
-    // background: linear-gradient(102deg, rgba(96, 90, 211, 0.712) 0%, rgba(255, 255, 255, 0) 100%);
     border-radius: 20px;
-
     background-color: rgba(245, 245, 245, 0.2);
+    &.nonactive{
+        display: none;
+    }
     
 }
 
