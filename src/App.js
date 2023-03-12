@@ -87,10 +87,11 @@ function App() {
                         </div>
                     </div>
                     <CurrentWeather />
+                  
                     <div className='bottom-block'>
                         <WeekForecast />
                         <HourlyForecast/>
-                        <div className={`meteo-block ${showHourly ? `nonactive` : null}`}>
+                        <div className='meteo-block'>
                             <div className='meteo-row'>
                                 <div className='meteo-item'>
                                     <div className='meteo-info'>
@@ -131,6 +132,7 @@ function App() {
                             </div>  
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </section>
