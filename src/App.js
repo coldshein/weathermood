@@ -40,7 +40,7 @@ function App() {
 
     React.useEffect(() => {
         const main = {
-            name: 'Korosten',
+            name: 'Kiev',
         }
         dispatch(fetchForecast(main));
     }, [])

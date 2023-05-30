@@ -13,18 +13,17 @@ const WeatherBlock = () => {
 
     const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
 
+    const feelslike = Math.floor(current.feelslike_c)
+    const currentTemp = Math.floor(current.temp_c)
 
-    if (!current) {
-        return 'Loading...'
-    }
     return (
         <div className="weather-block">
             <div className="weather-info">
                 <div className="weather-condition"> 
                     {current.condition?.text}
                 </div>
-                <div className="temperature">{current.temp_c} &#176;</div>
-                <div className="feelslike">Feels like {current.feelslike_c} &#176;</div>
+                <div className="temperature">{currentTemp}&#176;</div>
+                <div className="feelslike">Feels like {feelslike}&#176;</div>
                 <div className="city">{location.name}, {location.country}</div>
             </div>
             <div className="day-info">
